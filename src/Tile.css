@@ -11,6 +11,7 @@
   position: absolute;
   transform-style: preserve-3d;
   transition: transform 1s;
+  border: 1px solid #999;
 }
 
 .Tile-container .Tile-card figure {

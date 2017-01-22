@@ -1,0 +1,6 @@
+.TileGrid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 150px;
+}
