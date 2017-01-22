@@ -1,0 +1,36 @@
+.Tile-container {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  perspective: 800px;
+}
+
+.Tile-container .Tile-card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.Tile-container .Tile-card figure {
+  margin: 0;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.Tile-container .Tile-card .front {
+  background: red;
+}
+
+.Tile-container .Tile-card .back {
+  background: blue;
+  transform: rotateY( 180deg );
+}
+
+.Tile-container .Tile-card.flipped {
+  transform: rotateY( 180deg );
+}
