@@ -34,8 +34,6 @@ class App extends Component {
   }
 
   onTileClick(tile) {
-    console.debug('App.onTileClick', tile.id);
-
     const matchingTile = this._getMatchingTile(tile);
     if (matchingTile.temporarilyFlipped) {
       const modifiedTiles = [].concat(this.state.tiles).map(t => {
@@ -55,8 +53,6 @@ class App extends Component {
   }
 
   onTileFlip(tileId, isFlipped) {
-    console.debug('App.onTileFlip', tileId, isFlipped);
-
     this.setState({
       temporaryFlippedTiles: Object.assign(
         {},

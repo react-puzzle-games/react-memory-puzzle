@@ -36,8 +36,6 @@ class Tile extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.flipped && !this.props.flipped) {
-      console.debug('Flipped True incoming prop!');
-
       this._cancelPendingAnimation();
       this.setState({
         flipped: nextProps.flipped,
@@ -46,53 +44,54 @@ class Tile extends Component {
   }
 
   flipCard() {
-    console.debug('Public flip card...');
-
     this._internalFlipCard();
 
     // Enqueue a flip back to its original state
-    // This can be canceled by an incoming flipped prop
-    this._enqueuePendingAnimation();
+    // only if we don't already have a pending one, otherwise
+    // cancel it.
+    // The animation only works if the card hasn't already
+    // been flipped via props.
+    if (!this.state.pendingAnimationId) {
+      if (!this.props.flipped) {
+        this._enqueuePendingAnimation();
+      }
+    } else {
+      this._cancelPendingAnimation();
+    }
 
     // Call public callback
-    this.props.onClick({
-      name: this.props.name,
-      id: this.props.id,
-    });
+    this.props.onClick();
   }
 
   _enqueuePendingAnimation() {
-    if (!this.props.flipped) {
-      console.debug('Enqueuing animation...');
-
-      this.setState({
-        pendingAnimationId: setTimeout(this._internalFlipCard.bind(this), 5000),
-      });
-    }
+    this.setState({
+      pendingAnimationId: setTimeout(this._internalFlipCard.bind(this), 2000),
+    });
   }
 
   _internalFlipCard() {
-    console.debug(`Flipping internal card... Old State flipped: ${this.state.flipped}`);
-
     this.setState((prevState, props) => {
       if (!props.flipped) {
         return {
           flipped: !prevState.flipped,
+          pendingAnimationId: 0,
         };
       } else {
         // If props.flipped is True then this card cannot be flipped again
         return {
           flipped: true,
+          pendingAnimationId: 0,
         };
       }
     });
   }
 
   _cancelPendingAnimation() {
-    console.debug('Cancelling animation...');
-
     if (this.state.pendingAnimationId) {
       clearTimeout(this.state.pendingAnimationId);
+      this.setState({
+        pendingAnimationId: 0,
+      });
     }
   }
 

@@ -12,7 +12,7 @@ class TileGrid extends Component {
           return (
             <Tile
               key={`Tile-${i}`}
-              onClick={this.props.onClick}
+              onClick={this.props.onClick.bind(this, tile)}
               onFlip={this.props.onFlip}
               {...tile}
             />
