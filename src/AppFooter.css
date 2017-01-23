@@ -1,0 +1,15 @@
+.App-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: .1 0 10%;
+  font-size: 0.9em;
+  font-style: italic;
+  background-color: #000;
+  color: #fff;
+}
+
+.App-footer > h5 {
+  text-align: center;
+}
