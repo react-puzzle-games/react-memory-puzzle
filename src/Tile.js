@@ -6,9 +6,6 @@ class Tile extends Component {
   constructor(props) {
     super(props);
 
-    this.flipCard = this.flipCard.bind(this);
-    this._internalFlipCard = this._internalFlipCard.bind(this);
-
     this.state = {
       flipped: props.flipped,
     };
@@ -18,7 +15,7 @@ class Tile extends Component {
     const classes = `Tile-card ${this.state.flipped ? 'flipped' : ''}`;
 
     return (
-      <section className="Tile-container" onClick={this.flipCard}>
+      <section className="Tile-container" onClick={this.flipCard.bind(this)}>
         <div className={classes}>
           <figure className="front">
             <div style={this._getCardStyles()}></div>
@@ -31,12 +28,14 @@ class Tile extends Component {
     );
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return !(nextProps.flipped && nextProps.flipped === nextState.flipped);
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.flipped !== this.state.flipped) {
+      this.props.onFlip(this.props.id, this.state.flipped);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.flipped) {
+    if (nextProps.flipped && !this.props.flipped) {
       console.debug('Flipped True incoming prop!');
 
       this._cancelPendingAnimation();
@@ -49,23 +48,32 @@ class Tile extends Component {
   flipCard() {
     console.debug('Public flip card...');
 
-    // Peek to see the image below
     this._internalFlipCard();
 
     // Enqueue a flip back to its original state
     // This can be canceled by an incoming flipped prop
     this._enqueuePendingAnimation();
+
+    // Call public callback
+    this.props.onClick({
+      name: this.props.name,
+      id: this.props.id,
+    });
   }
 
   _enqueuePendingAnimation() {
-    console.debug('Enqueuing animation...');
-    this.setState({
-      pendingAnimationId: setTimeout(this._internalFlipCard, 5000),
-    })
+    if (!this.props.flipped) {
+      console.debug('Enqueuing animation...');
+
+      this.setState({
+        pendingAnimationId: setTimeout(this._internalFlipCard.bind(this), 5000),
+      });
+    }
   }
 
   _internalFlipCard() {
-    console.debug('Flipping internal card...');
+    console.debug(`Flipping internal card... Old State flipped: ${this.state.flipped}`);
+
     this.setState((prevState, props) => {
       if (!props.flipped) {
         return {
@@ -82,6 +90,7 @@ class Tile extends Component {
 
   _cancelPendingAnimation() {
     console.debug('Cancelling animation...');
+
     if (this.state.pendingAnimationId) {
       clearTimeout(this.state.pendingAnimationId);
     }
@@ -101,8 +110,10 @@ class Tile extends Component {
 }
 
 Tile.propTypes = {
-  flipped: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
+  onFlip: PropTypes.func.isRequired,
+  flipped: PropTypes.bool,
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   logo: PropTypes.string.isRequired,
 };

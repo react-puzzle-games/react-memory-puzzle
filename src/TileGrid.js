@@ -12,7 +12,8 @@ class TileGrid extends Component {
           return (
             <Tile
               key={`Tile-${i}`}
-              onClick={this.props.onClick.bind(tile.name)}
+              onClick={this.props.onClick}
+              onFlip={this.props.onFlip}
               {...tile}
             />
           );
@@ -24,10 +25,12 @@ class TileGrid extends Component {
 
 TileGrid.propTypes = {
   tiles: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     logo: PropTypes.string.isRequired,
   })).isRequired,
   onClick: PropTypes.func.isRequired,
-}
+  onFlip: PropTypes.func.isRequired,
+};
 
 export default TileGrid;

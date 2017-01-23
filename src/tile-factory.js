@@ -9,10 +9,13 @@ export default {
 
     return {
       gameState: GAME_STARTED,
-      tiles: randomSubarray(randomLogos, 30).map(tile => ({
+      tiles: randomSubarray(randomLogos, 30).map((tile, tileId) => ({
+        id: tileId,
         name: tile.name,
+        flipped: false,
         logo: `${tile.name.toLowerCase()}.png`,
       })),
+      temporaryFlippedTiles: {},
     }
   }
 }
