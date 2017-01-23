@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
 
 import TileGrid from './TileGrid';
+import AppHeader from './AppHeader';
+import AppFooter from './AppFooter';
+import tileFactory from './tile-factory';
 
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = tileFactory.newGame();
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>React Memory Puzzle</h2>
+        <AppHeader />
+        <div className="App-content">
+          <TileGrid tiles={this.state.tiles} onClick={this.onTileClick} />
         </div>
-        <div>
-          <TileGrid />
-        </div>
+        <AppFooter />
       </div>
     );
+  }
+
+  onTileClick(name) {
+    console.log(name);
   }
 }
 
