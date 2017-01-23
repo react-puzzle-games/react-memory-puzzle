@@ -13,8 +13,7 @@ class TileGrid extends Component {
             <Tile
               key={`Tile-${i}`}
               onClick={this.props.onClick.bind(tile.name)}
-              name={tile.name}
-              logo={tile.logo}
+              {...tile}
             />
           );
         })}

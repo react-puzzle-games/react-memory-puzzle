@@ -351,9 +351,6 @@ export default [
     "name": "Seneca"
   },
   {
-    "name": "Sentry"
-  },
-  {
     "name": "Sizzle"
   },
   {
