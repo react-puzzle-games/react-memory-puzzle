@@ -11,7 +11,6 @@
   position: absolute;
   transform-style: preserve-3d;
   transition: transform 1s;
-  border: 1px solid #999;
 }
 
 .Tile-container .Tile-card figure {
@@ -23,12 +22,7 @@
   backface-visibility: hidden;
 }
 
-.Tile-container .Tile-card .front {
-  background: red;
-}
-
 .Tile-container .Tile-card .back {
-  background: blue;
   transform: rotateY( 180deg );
 }
 

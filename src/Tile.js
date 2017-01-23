@@ -20,8 +20,12 @@ class Tile extends Component {
     return (
       <section className="Tile-container" onClick={this.flipCard}>
         <div className={classes}>
-          <figure className="front">1</figure>
-          <figure className="back">2</figure>
+          <figure className="front">
+            <div style={this._getCardStyles()}></div>
+          </figure>
+          <figure className="back">
+            <div style={this._getCardStyles(this.props.logo)}></div>
+          </figure>
         </div>
       </section>
     );
@@ -82,11 +86,25 @@ class Tile extends Component {
       clearTimeout(this.state.pendingAnimationId);
     }
   }
+
+  _getCardStyles(logo = 'default.png') {
+    return {
+      backgroundImage: `url('assets/${logo || 'default.png'}')`,
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center center',
+      backgroundOrigin: 'border-box',
+      backgroundSize: 40,
+      width: 50,
+      height: 50,
+    }
+  }
 }
 
 Tile.propTypes = {
   flipped: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  logo: PropTypes.string.isRequired,
 };
 
 Tile.defaultProps = {
