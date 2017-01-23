@@ -65,7 +65,7 @@ class Tile extends Component {
 
   _enqueuePendingAnimation() {
     this.setState({
-      pendingAnimationId: setTimeout(this._internalFlipCard.bind(this), 2000),
+      pendingAnimationId: setTimeout(this._internalFlipCard.bind(this), 2500),
     });
   }
 

@@ -4,6 +4,7 @@ import TileGrid from './TileGrid';
 import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
 import tileFactory from './tile-factory';
+import { GAME_WON, GAME_STARTED } from './game-states';
 
 import './App.css';
 
@@ -46,21 +47,35 @@ class App extends Component {
 
         return t;
       });
+
+      // Check if game has been won
+      const gameWon = modifiedTiles.reduce(
+        (result, tile) => {
+          return result && tile.flipped;
+        }, true
+      );
+
       this.setState({
         tiles: modifiedTiles,
+        gameState: gameWon ? GAME_WON : GAME_STARTED,
       });
     }
+
+    // Increment number of game moves
+    this.setState((prevState, props) => ({
+      moves: prevState.moves + 1,
+    }));
   }
 
   onTileFlip(tileId, isFlipped) {
+    const temporaryFlippedTiles = Object.assign({},
+      this.state.temporaryFlippedTiles, {
+        [tileId]: isFlipped,
+      }
+    );
+
     this.setState({
-      temporaryFlippedTiles: Object.assign(
-        {},
-        this.state.temporaryFlippedTiles,
-        {
-          [tileId]: isFlipped,
-        }
-      )
+      temporaryFlippedTiles,
     });
   }
 

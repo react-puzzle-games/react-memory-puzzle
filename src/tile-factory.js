@@ -16,6 +16,7 @@ export default {
         logo: `${tile.name.toLowerCase()}.png`,
       })),
       temporaryFlippedTiles: {},
+      moves: 0,
     }
   }
 }
