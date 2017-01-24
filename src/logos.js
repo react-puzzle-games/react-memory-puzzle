@@ -36,9 +36,6 @@ export default [
     "name": "Backbone"
   },
   {
-    "name": "BatmanJS"
-  },
-  {
     "name": "Blaze_CSS"
   },
   {
@@ -403,9 +400,6 @@ export default [
   },
   {
     "name": "Wakanda"
-  },
-  {
-    "name": "WebGL"
   },
   {
     "name": "Webix"
