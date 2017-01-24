@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import TileGrid from './TileGrid';
 import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
+import GameStats from './GameStats';
 import tileFactory from './tile-factory';
 import { GAME_WON, GAME_STARTED } from './game-states';
 
@@ -23,6 +24,10 @@ class App extends Component {
       <div className="App">
         <AppHeader />
         <div className="App-content">
+          <GameStats
+            moves={this.state.moves}
+            gameState={this.state.gameState}
+          />
           <TileGrid
             tiles={this.state.tiles}
             onClick={this.onTileClick}

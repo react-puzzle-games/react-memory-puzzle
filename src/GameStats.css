@@ -1,0 +1,12 @@
+.GameStats {
+  width: 511px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+@media all and (max-width: 420px) {
+  .GameStats {
+    width: 250px;
+  }
+}
