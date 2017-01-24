@@ -8,6 +8,7 @@ class Tile extends Component {
 
     this.state = {
       flipped: props.flipped,
+      pendingAnimationId: 0,
     };
   }
 
@@ -15,7 +16,7 @@ class Tile extends Component {
     const classes = `Tile-card ${this.state.flipped ? 'flipped' : ''}`;
 
     return (
-      <section className="Tile-container" onClick={this.flipCard.bind(this)}>
+      <section className="Tile-container" onClick={this._flipCard.bind(this)}>
         <div className={classes}>
           <figure className="front">
             <div style={this._getCardStyles()}></div>
@@ -36,14 +37,30 @@ class Tile extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.flipped && !this.props.flipped) {
-      this._cancelPendingAnimation();
+      this._cancelAnimation();
       this.setState({
         flipped: nextProps.flipped,
       });
     }
   }
 
-  flipCard() {
+  _enqueueAnimation(interval = 1500) {
+    const timeout = setTimeout(this._internalFlipCard.bind(this), interval);
+    this.setState({
+      pendingAnimationId: timeout,
+    });
+  }
+
+  _cancelAnimation() {
+    if (this.state.pendingAnimationId) {
+      clearTimeout(this.state.pendingAnimationId);
+      this.setState({
+        pendingAnimationId: 0,
+      });
+    }
+  }
+
+  _flipCard() {
     this._internalFlipCard();
 
     // Enqueue a flip back to its original state
@@ -53,20 +70,14 @@ class Tile extends Component {
     // been flipped via props.
     if (!this.state.pendingAnimationId) {
       if (!this.props.flipped) {
-        this._enqueuePendingAnimation();
+        this._enqueueAnimation();
       }
     } else {
-      this._cancelPendingAnimation();
+      this._cancelAnimation();
     }
 
     // Call public callback
     this.props.onClick();
-  }
-
-  _enqueuePendingAnimation() {
-    this.setState({
-      pendingAnimationId: setTimeout(this._internalFlipCard.bind(this), 2500),
-    });
   }
 
   _internalFlipCard() {
@@ -84,15 +95,6 @@ class Tile extends Component {
         };
       }
     });
-  }
-
-  _cancelPendingAnimation() {
-    if (this.state.pendingAnimationId) {
-      clearTimeout(this.state.pendingAnimationId);
-      this.setState({
-        pendingAnimationId: 0,
-      });
-    }
   }
 
   _getCardStyles(logo = 'default.png') {
