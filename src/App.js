@@ -15,6 +15,7 @@ class App extends Component {
 
     this.onTileClick = this.onTileClick.bind(this);
     this.onTileFlip = this.onTileFlip.bind(this);
+    this.onRestartGame = this.onRestartGame.bind(this);
 
     this.state = tileFactory.newGame();
   }
@@ -27,6 +28,7 @@ class App extends Component {
           <GameStats
             moves={this.state.moves}
             gameState={this.state.gameState}
+            onRestart={this.onRestartGame}
           />
           <TileGrid
             tiles={this.state.tiles}
@@ -82,6 +84,10 @@ class App extends Component {
     this.setState({
       temporaryFlippedTiles,
     });
+  }
+
+  onRestartGame() {
+    this.setState(tileFactory.newGame());
   }
 
   _getMatchingTile(tile) {

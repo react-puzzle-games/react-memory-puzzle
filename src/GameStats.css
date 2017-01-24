@@ -10,3 +10,12 @@
     width: 250px;
   }
 }
+
+.GameStats-Wrapper {
+  display: flex;
+}
+
+.GameStats-Message {
+  line-height: 1.5em;
+  margin-right: 8px;
+}

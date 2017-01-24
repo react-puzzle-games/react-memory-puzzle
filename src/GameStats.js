@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
+import RestartButton from './RestartButton';
 import { GAME_STARTED, GAME_WON } from './game-states';
 
 import './GameStats.css';
@@ -21,7 +22,10 @@ class GameStats extends Component {
 
     if (this.props.gameState === GAME_WON) {
       return (
-        <span>Congrats!</span>
+        <div className="GameStats-Wrapper">
+          <span className="GameStats-Message">Congrats!</span>
+          <RestartButton onClick={this.props.onRestart}/>
+        </div>
       );
     }
   }
@@ -30,6 +34,7 @@ class GameStats extends Component {
 GameStats.propTypes = {
   gameState: PropTypes.symbol.isRequired,
   moves: PropTypes.number,
+  onRestart: PropTypes.func.isRequired,
 };
 
 GameStats.defaultProps = {

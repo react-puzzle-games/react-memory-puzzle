@@ -36,7 +36,7 @@ class Tile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.flipped && !this.props.flipped) {
+    if (nextProps.flipped !== this.props.flipped) {
       this._cancelAnimation();
       this.setState({
         flipped: nextProps.flipped,
