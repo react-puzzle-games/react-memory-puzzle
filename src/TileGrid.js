@@ -4,7 +4,19 @@ import Tile from './Tile';
 
 import './TileGrid.css';
 
-class TileGrid extends Component {
+export default class TileGrid extends Component {
+  static propTypes = {
+    tiles: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        logo: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    onClick: PropTypes.func.isRequired,
+    onFlip: PropTypes.func.isRequired,
+  };
+
   render() {
     return (
       <div className="TileGrid">
@@ -22,15 +34,3 @@ class TileGrid extends Component {
     );
   }
 }
-
-TileGrid.propTypes = {
-  tiles: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    logo: PropTypes.string.isRequired,
-  })).isRequired,
-  onClick: PropTypes.func.isRequired,
-  onFlip: PropTypes.func.isRequired,
-};
-
-export default TileGrid;
