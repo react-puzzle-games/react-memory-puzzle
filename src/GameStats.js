@@ -9,7 +9,7 @@ class GameStats extends Component {
   render() {
     return (
       <div className="GameStats">
-        <span>Moves: {this.props.moves}</span>
+        <span className="GameStats-Message">Moves: {this.props.moves}</span>
         {this._renderGameState()}
       </div>
     );
