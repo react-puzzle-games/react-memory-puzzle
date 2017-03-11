@@ -97,13 +97,15 @@ class Tile extends Component {
     });
   }
 
-  _getCardStyles(logo = 'default.png') {
+  _getCardStyles(logo) {
     return {
-      backgroundImage: `url('assets/${logo || 'default.png'}')`,
+      [logo && 'backgroundImage']: `url('assets/${logo}')`,
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center center',
       backgroundOrigin: 'border-box',
-      backgroundSize: 40,
+      backgroundColor: 'transparent',
+      backgroundSize: 50,
+      borderRadius: 15,
       width: 50,
       height: 50,
     }

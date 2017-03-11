@@ -1,6 +1,6 @@
 .Tile-container {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   position: relative;
   perspective: 800px;
 }
@@ -9,14 +9,17 @@
   width: 100%;
   height: 100%;
   position: absolute;
+  background-color: #66A3C6;
   transform-style: preserve-3d;
   transition: transform .280s;
+  box-shadow: 4px 4px 2px #CEC5AA;
 }
 
 .Tile-container .Tile-card figure {
   margin: 0;
   display: block;
   position: absolute;
+  border-radius: 15px;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
@@ -28,4 +31,5 @@
 
 .Tile-container .Tile-card.flipped {
   transform: rotateY( 180deg );
+  box-shadow: -4px 4px 2px #CEC5AA;
 }

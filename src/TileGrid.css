@@ -1,23 +1,30 @@
 .TileGrid {
   display: flex;
   flex-wrap: wrap;
-  width: 511px;
-  min-height: 154px;
+  width: calc(60px * 6 + 5 * 32px);
+  min-height: calc(60px * 5 + 4 * 32px);
+}
+
+.TileGrid > .Tile-container {
+  margin-right: 32px;
+  margin-bottom: 32px;
+}
+
+.TileGrid > .Tile-container:nth-child(6n) {
+  margin-right: 0;
+}
+
+.TileGrid > .Tile-container:nth-last-child(6n) {
+  margin-bottom: 0;
 }
 
 .TileGrid > .Tile-container .Tile-card {
-  border-top: 1px solid #999;
-  border-left: 1px solid #999;
+  border-top: 10px solid #E9E1C9;
+  border-left: 10px solid #E9E1C9;
+  border-radius: 15px;
 }
 
 .TileGrid > .Tile-container .Tile-card:last-child {
-  border-bottom: 1px solid #999;
-  border-right: 1px solid #999;
-}
-
-@media all and (max-width: 420px) {
-  .TileGrid {
-    width: 250px;
-    min-height: 309px;
-  }
+  border-bottom: 10px solid #E9E1C9;
+  border-right: 10px solid #E9E1C9;
 }
