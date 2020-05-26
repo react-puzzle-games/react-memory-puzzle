@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import RestartButton from './RestartButton';
 import { GAME_STARTED, GAME_WON } from './game-states';
@@ -24,7 +25,7 @@ class GameStats extends Component {
       return (
         <div className="GameStats-Wrapper">
           <span className="GameStats-Message">Congrats!</span>
-          <RestartButton onClick={this.props.onRestart}/>
+          <RestartButton onClick={this.props.onRestart} />
         </div>
       );
     }

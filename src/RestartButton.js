@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './RestartButton.css';
 
@@ -16,6 +17,6 @@ class RestartButton extends Component {
 
 RestartButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-}
+};
 
 export default RestartButton;

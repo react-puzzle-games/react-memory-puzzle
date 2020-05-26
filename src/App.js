@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import TileGrid from './TileGrid';
 import AppHeader from './AppHeader';
-import AppFooter from './AppFooter';
+import Footer from './Footer';
 import GameStats from './GameStats';
 import tileFactory from './tile-factory';
 import { GAME_WON, GAME_STARTED } from './game-states';
@@ -36,7 +36,7 @@ class App extends Component {
             onFlip={this.onTileFlip}
           />
         </div>
-        <AppFooter />
+        <Footer />
       </div>
     );
   }
@@ -59,7 +59,8 @@ class App extends Component {
       const gameWon = modifiedTiles.reduce(
         (result, tile) => {
           return result && tile.flipped;
-        }, true
+        },
+        true,
       );
 
       this.setState({
@@ -75,10 +76,12 @@ class App extends Component {
   }
 
   onTileFlip(tileId, isFlipped) {
-    const temporaryFlippedTiles = Object.assign({},
-      this.state.temporaryFlippedTiles, {
+    const temporaryFlippedTiles = Object.assign(
+      {},
+      this.state.temporaryFlippedTiles,
+      {
         [tileId]: isFlipped,
-      }
+      },
     );
 
     this.setState({
@@ -93,7 +96,7 @@ class App extends Component {
   _getMatchingTile(tile) {
     // Search for matching tile and see if it's also flipped
     const matchingTile = this.state.tiles.find(t => {
-      return (t.id !== tile.id && t.name === tile.name)
+      return t.id !== tile.id && t.name === tile.name;
     });
 
     return {

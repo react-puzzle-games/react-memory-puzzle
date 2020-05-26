@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Tile from './Tile';
 
@@ -24,11 +25,13 @@ class TileGrid extends Component {
 }
 
 TileGrid.propTypes = {
-  tiles: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    logo: PropTypes.string.isRequired,
-  })).isRequired,
+  tiles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      logo: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   onClick: PropTypes.func.isRequired,
   onFlip: PropTypes.func.isRequired,
 };
