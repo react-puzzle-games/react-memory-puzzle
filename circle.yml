@@ -10,3 +10,9 @@ jobs:
           - image: circleci/node:lts
         steps:
           - run: yarn test:coveralls
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
