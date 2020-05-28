@@ -4,11 +4,20 @@ jobs:
         docker:
           - image: circleci/node:lts
         steps:
-          - run: echo "Build."
+          - add_ssh_keys:
+              fingerprints:
+                - "11:c9:6c:9c:68:e8:0d:3f:db:a2:6f:7f:39:fb:19:0b"
+          - checkout
+          - run: yarn install
+          
     test:
         docker:
           - image: circleci/node:lts
         steps:
+          - add_ssh_keys:
+              fingerprints:
+                - "11:c9:6c:9c:68:e8:0d:3f:db:a2:6f:7f:39:fb:19:0b"
+          - checkout
           - run: yarn test:coveralls
 workflows:
   version: 2
