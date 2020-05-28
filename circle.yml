@@ -4,10 +4,12 @@ jobs:
         docker:
           - image: circleci/node:lts
         steps:
+          - add_ssh_keys
           - checkout
     test:
         docker:
           - image: circleci/node:lts
         steps:
+          - add_ssh_keys
           - checkout
           - run: yarn test:coveralls
