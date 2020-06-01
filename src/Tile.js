@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './Tile.css';
 
@@ -19,10 +20,10 @@ class Tile extends Component {
       <section className="Tile-container" onClick={this._flipCard.bind(this)}>
         <div className={classes}>
           <figure className="front">
-            <div style={this._getCardStyles()}></div>
+            <div style={this._getCardStyles()} />
           </figure>
           <figure className="back">
-            <div style={this._getCardStyles(this.props.logo)}></div>
+            <div style={this._getCardStyles(this.props.logo)} />
           </figure>
         </div>
       </section>
@@ -106,7 +107,7 @@ class Tile extends Component {
       backgroundSize: 40,
       width: 50,
       height: 50,
-    }
+    };
   }
 }
 

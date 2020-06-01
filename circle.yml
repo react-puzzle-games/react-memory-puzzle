@@ -1,13 +1,27 @@
-machine:
-    environment:
-        PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
-
-dependencies:
-    override:
-        - yarn
-    cache_directories:
-        - ~/.cache/yarn
-
-test:
-    override:
-        - yarn test:coveralls
+version: 2
+jobs:
+    build:
+        docker:
+          - image: circleci/node:lts
+        steps:
+          - add_ssh_keys:
+              fingerprints:
+                - "11:c9:6c:9c:68:e8:0d:3f:db:a2:6f:7f:39:fb:19:0b"
+          - checkout
+          - run: yarn install
+          
+    test:
+        docker:
+          - image: circleci/node:lts
+        steps:
+          - add_ssh_keys:
+              fingerprints:
+                - "11:c9:6c:9c:68:e8:0d:3f:db:a2:6f:7f:39:fb:19:0b"
+          - checkout
+          - run: yarn test:coveralls
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
